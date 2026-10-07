@@ -155,6 +155,20 @@ message WildcardQuery {
   string wildcard = 3;
 }
 
+message CustomScoreQuery {
+  Query query = 1;
+  string source = 2;
+  repeated string fields = 3;
+  map<string, bytes> params = 4;
+}
+
+message CustomFilterQuery {
+  Query query = 1;
+  string source = 2;
+  repeated string fields = 3;
+  map<string, bytes> params = 4; // Each value is JSON-encoded
+}
+
 message Query {
   oneof query {
     BooleanFieldQuery boolean_field_query = 1;
@@ -178,6 +192,8 @@ message Query {
     TermQuery term_query = 19;
     TermRangeQuery term_range_query = 20;
     WildcardQuery wildcard_query = 21;
+    CustomScoreQuery custom_score = 22;
+    CustomFilterQuery custom_filter = 23;
   }
 }
 
